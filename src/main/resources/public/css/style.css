@@ -156,7 +156,25 @@ main {
 .hero p {
     color: var(--color-text-muted);
     font-size: 1.15rem;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+}
+
+/* Rounded "pill" that shows the price */
+.hero .hero-price {
+    display: inline-block;
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    border-radius: 999px;
+    padding: 4px 16px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
 }
 
 /* ===== Buttons ===== */
@@ -177,6 +195,17 @@ main {
 
 .btn-primary:hover {
     background-color: var(--color-accent);
+}
+
+/* Transparent button with a yellow border */
+.btn-outline {
+    border: 2px solid var(--color-primary);
+    color: var(--color-text);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-primary);
+    color: #1F1F1F;
 }
 
 /* ===== Footer ===== */
