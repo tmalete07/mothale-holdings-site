@@ -401,6 +401,12 @@ main {
     padding: 24px;
 }
 
+/* Heading inside a form card, e.g. "Send us a message" */
+.form-title {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
 /* "* Required fields" note at the top of the form */
 .form-note {
     font-size: 0.9rem;
@@ -567,6 +573,12 @@ main {
 }
 
 /* ===== Contact page ===== */
+/* Right-hand column: details, social links, map */
+.contact-aside h2 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
 .contact-details {
     list-style: none;
     margin-bottom: 32px;
@@ -591,6 +603,7 @@ main {
     flex-wrap: wrap;
     gap: 12px;
     list-style: none;
+    margin-bottom: 32px;
 }
 
 .social-links a {

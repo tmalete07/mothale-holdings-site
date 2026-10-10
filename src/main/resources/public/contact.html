@@ -9,6 +9,7 @@
     <script src="js/theme.js"></script>
     <script src="js/layout.js" defer></script>
     <script src="js/config.js" defer></script>
+    <script src="js/validation.js" defer></script>
     <script src="js/contact.js" defer></script>
 </head>
 <body>
@@ -24,23 +25,78 @@
     </section>
 
     <section class="section">
-        <div class="container two-col">
+        <div class="container form-layout">
 
-            <!-- Details and social links (filled in by contact.js from config.js) -->
-            <div>
+            <!-- Contact form (BRD E-01) -->
+            <div class="form-card">
+                <h2 class="form-title">Send us a message</h2>
+                <p class="form-note"><span class="required">*</span> Required fields</p>
+
+                <form id="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name <span class="required" aria-hidden="true">*</span></label>
+                        <input type="text" id="name" name="name" autocomplete="name" required
+                               aria-describedby="name-error">
+                        <p class="error" id="name-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address <span class="required" aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" autocomplete="email" required
+                               aria-describedby="email-error">
+                        <p class="error" id="email-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone <span class="optional">(optional)</span></label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel"
+                               placeholder="082 123 4567" aria-describedby="phone-error">
+                        <p class="error" id="phone-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message <span class="required" aria-hidden="true">*</span></label>
+                        <textarea id="message" name="message" rows="5" required
+                                  placeholder="How can we help?" aria-describedby="message-error"></textarea>
+                        <p class="error" id="message-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="consent" name="consent" required
+                                   aria-describedby="consent-error">
+                            <span>I agree that Mothale Holdings may use my details to respond to my message,
+                                      as explained in the <a href="privacy.html">Privacy Policy</a>.
+                                      <span class="required" aria-hidden="true">*</span></span>
+                        </label>
+                        <p class="error" id="consent-error" aria-live="polite"></p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="contact-submit" disabled>Send Message</button>
+                    <p class="form-hint" id="contact-submit-hint">
+                        Please fill in all required fields (*) and agree to the Privacy Policy to send.
+                    </p>
+                </form>
+
+                <!-- Shown after a successful submit -->
+                <div class="success-message" id="contact-success" role="status" hidden>
+                    <h2>Message sent!</h2>
+                    <p>Thank you for getting in touch. We'll get back to you as soon as possible.</p>
+                </div>
+            </div>
+
+            <!-- Details, social links and map (filled in by contact.js from config.js) -->
+            <aside class="contact-aside">
                 <h2>Our details</h2>
                 <ul class="contact-details" id="contact-details"></ul>
 
                 <h2>Follow us</h2>
                 <ul class="social-links" id="social-links"></ul>
-            </div>
 
-            <!-- Map -->
-            <div>
                 <h2>Find us</h2>
                 <iframe class="map-frame" title="Map showing the Mothale Holdings address" loading="lazy"
                         src="https://maps.google.com/maps?q=1%20Bokmakierie%20Road%2C%20Daggafontein%2C%20Springs&output=embed"></iframe>
-            </div>
+            </aside>
 
         </div>
     </section>
