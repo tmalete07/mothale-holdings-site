@@ -1,4 +1,4 @@
-// Builds the header for every page, so we only maintain it in one place.
+// Builds the header and footer for every page, so we only maintain them in one place.
 
 const NAV_LINKS = [
     { href: "index.html", label: "Home" },
@@ -49,4 +49,32 @@ function setupMobileMenu() {
     });
 }
 
+function renderFooter() {
+    const footer = document.getElementById("site-footer");
+    const year = new Date().getFullYear();
+
+    footer.innerHTML = `
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Mothale Holdings</h3>
+                    <p>Scooter rentals for delivery drivers in Springs, Gauteng.</p>
+                </div>
+                <div>
+                    <h3>Quick links</h3>
+                    <ul>${buildNavLinks()}</ul>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <p>1 Bokmakierie Road, Daggafontein, Springs, Gauteng, 1559</p>
+                    <p><a href="mailto:mothalestockvel@gmail.com">mothalestockvel@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ${year} Mothale Holdings (Pty) Ltd &middot; Enterprise No. 2026/503839/07</p>
+            </div>
+        </div>`;
+}
+
 renderHeader();
+renderFooter();
