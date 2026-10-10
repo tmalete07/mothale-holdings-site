@@ -431,6 +431,55 @@ main {
     list-style: none;
 }
 
+/* One search result: title link, snippet, page name */
+.search-result {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.search-result-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.search-result-title:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+.search-result p {
+    color: var(--color-text-muted);
+    margin: 4px 0;
+}
+
+.search-result-url {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+}
+
+/* "No results found" box */
+.no-results {
+    background-color: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 24px;
+}
+
+.no-results h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.no-results p {
+    margin-bottom: 8px;
+}
+
+.no-results a {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
 /* ===== About page ===== */
 /* Two columns on desktop, one on phone */
 .two-col {
