@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Send a scooter rental enquiry to Mothale Holdings and get a quote within 2 business days.">
+    <title>Rent a Bike | Mothale Holdings</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme.js"></script>
+    <script src="js/layout.js" defer></script>
+    <script src="js/rent-form.js" defer></script>
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<main>
+    <!-- Page heading -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Rent a Bike</h1>
+            <p>Send us your details and we'll email you a quote within 2 business days.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container form-layout">
+
+            <!-- Enquiry form -->
+            <div class="form-card">
+                <p class="form-note"><span class="required">*</span> Required fields</p>
+
+                <!-- novalidate: we will show our own messages instead of the browser's -->
+                <form id="rent-form" novalidate>
+                    <div class="form-group">
+                        <label for="fullName">Full name <span class="required" aria-hidden="true">*</span></label>
+                        <input type="text" id="fullName" name="fullName" autocomplete="name" required
+                               aria-describedby="fullName-error">
+                        <p class="error" id="fullName-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address <span class="required" aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" autocomplete="email" required
+                               aria-describedby="email-error">
+                        <p class="error" id="email-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cellNumber">Cell number <span class="required" aria-hidden="true">*</span></label>
+                        <input type="tel" id="cellNumber" name="cellNumber" autocomplete="tel" required
+                               placeholder="082 123 4567" aria-describedby="cellNumber-error">
+                        <p class="error" id="cellNumber-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="collectionDate">Preferred date to collect the bike
+                            <span class="optional">(optional)</span></label>
+                        <input type="date" id="collectionDate" name="collectionDate"
+                               aria-describedby="collectionDate-error">
+                        <p class="error" id="collectionDate-error" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Address the quote should be sent to (BRD C-05) -->
+                    <fieldset class="address-fieldset">
+                        <legend>Address the quote should be sent to</legend>
+
+                        <div class="form-group">
+                            <label for="streetAddress">Street address <span class="required" aria-hidden="true">*</span></label>
+                            <input type="text" id="streetAddress" name="streetAddress" required
+                                   autocomplete="address-line1" placeholder="e.g. 12 Main Road"
+                                   aria-describedby="streetAddress-error">
+                            <p class="error" id="streetAddress-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="suburb">Suburb <span class="required" aria-hidden="true">*</span></label>
+                            <input type="text" id="suburb" name="suburb" required
+                                   autocomplete="address-level3" placeholder="e.g. Daggafontein"
+                                   aria-describedby="suburb-error">
+                            <p class="error" id="suburb-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City / Town <span class="required" aria-hidden="true">*</span></label>
+                                <!-- list="city-list" connects this input to the suggestions below -->
+                                <input type="text" id="city" name="city" list="city-list" required
+                                       autocomplete="address-level2" placeholder="Start typing..."
+                                       aria-describedby="city-error">
+                                <p class="error" id="city-error" aria-live="polite"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="province">Province <span class="required" aria-hidden="true">*</span></label>
+                                <select id="province" name="province" autocomplete="address-level1" required
+                                        aria-describedby="province-error">
+                                    <option value="">Select a province</option>
+                                    <option value="Eastern Cape">Eastern Cape</option>
+                                    <option value="Free State">Free State</option>
+                                    <option value="Gauteng">Gauteng</option>
+                                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                                    <option value="Limpopo">Limpopo</option>
+                                    <option value="Mpumalanga">Mpumalanga</option>
+                                    <option value="North West">North West</option>
+                                    <option value="Northern Cape">Northern Cape</option>
+                                    <option value="Western Cape">Western Cape</option>
+                                </select>
+                                <p class="error" id="province-error" aria-live="polite"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group postal-code-group">
+                            <label for="postalCode">Postal code <span class="required" aria-hidden="true">*</span></label>
+                            <input type="text" id="postalCode" name="postalCode" required
+                                   autocomplete="postal-code" inputmode="numeric" maxlength="4"
+                                   placeholder="e.g. 1559" aria-describedby="postalCode-error">
+                            <p class="error" id="postalCode-error" aria-live="polite"></p>
+                        </div>
+
+                        <!-- City suggestions: shown as the visitor types. Add more towns here any time. -->
+                        <datalist id="city-list">
+                            <option value="Alberton">
+                            <option value="Benoni">
+                            <option value="Bloemfontein">
+                            <option value="Boksburg">
+                            <option value="Brakpan">
+                            <option value="Cape Town">
+                            <option value="Centurion">
+                            <option value="Daveyton">
+                            <option value="Duduza">
+                            <option value="Durban">
+                            <option value="East London">
+                            <option value="Edenvale">
+                            <option value="Germiston">
+                            <option value="Gqeberha">
+                            <option value="Heidelberg">
+                            <option value="Johannesburg">
+                            <option value="Kempton Park">
+                            <option value="KwaThema">
+                            <option value="Midrand">
+                            <option value="Mbombela">
+                            <option value="Nigel">
+                            <option value="Pietermaritzburg">
+                            <option value="Polokwane">
+                            <option value="Pretoria">
+                            <option value="Randburg">
+                            <option value="Roodepoort">
+                            <option value="Rustenburg">
+                            <option value="Sandton">
+                            <option value="Soweto">
+                            <option value="Springs">
+                            <option value="Tembisa">
+                            <option value="Tsakane">
+                            <option value="Vanderbijlpark">
+                            <option value="Vereeniging">
+                        </datalist>
+                    </fieldset>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="consent" name="consent" required
+                                   aria-describedby="consent-error">
+                            <span>I agree that Mothale Holdings may use my details to prepare and send my quote,
+                                      as explained in the <a href="privacy.html">Privacy Policy</a>.
+                                      <span class="required" aria-hidden="true">*</span></span>
+                        </label>
+                        <p class="error" id="consent-error" aria-live="polite"></p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="rent-submit" disabled>Submit Enquiry</button>
+                    <p class="form-hint" id="submit-hint">
+                        Please fill in all required fields (*) and agree to the Privacy Policy to submit.
+                    </p>
+                </form>
+
+                <!-- Shown after a successful submit (hidden for now) -->
+                <div class="success-message" id="rent-success" role="status" hidden>
+                    <h2>Thank you, your enquiry has been received!</h2>
+                    <p>We'll email your quote within 2 business days. Please check your inbox (and spam folder).</p>
+                </div>
+            </div>
+
+            <!-- What happens next (from the BRD, section 8) -->
+            <aside class="info-box">
+                <h2>What happens next?</h2>
+                <ol>
+                    <li>We send you a formal quote within <strong>2 business days</strong>.</li>
+                    <li>Your quote is valid for <strong>7 days</strong>.</li>
+                    <li>To accept, pay the <strong>R350 deposit</strong> by EFT and reply to the quote email
+                        with your proof of payment.</li>
+                    <li>The deposit is refunded when your rental agreement ends. If you accept the quote
+                        but don't take up the rental, the deposit is non-refundable.</li>
+                    <li>Sign the Scooter Rental Agreement and collect your scooter.</li>
+                </ol>
+            </aside>
+
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>
