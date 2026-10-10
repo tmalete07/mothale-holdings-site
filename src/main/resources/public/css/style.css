@@ -22,6 +22,11 @@
     padding: 0;
 }
 
+/* Smooth scrolling for links like #how-it-works */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font);
     background-color: var(--color-bg);
@@ -180,6 +185,12 @@ main {
 /* ===== Sections (reused on every page) ===== */
 .section {
     padding: 64px 0;
+    scroll-margin-top: 80px;   /* stops the sticky header covering the heading */
+}
+
+/* Cream background to separate sections */
+.section-alt {
+    background-color: var(--color-surface);
 }
 
 .section-title {
@@ -221,6 +232,39 @@ main {
 .card-icon {
     font-size: 2rem;
     margin-bottom: 8px;
+}
+
+/* ===== Numbered steps ===== */
+/* CSS counters number the steps automatically: 1, 2, 3, 4 */
+.steps {
+    list-style: none;
+    counter-reset: step;
+}
+
+.steps li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 64px;
+}
+
+.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #1F1F1F;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.steps h3 {
+    margin-bottom: 4px;
 }
 
 /* ===== Buttons ===== */
