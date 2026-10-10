@@ -13,6 +13,17 @@
     --font: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
+/* ===== Dark mode ===== */
+/* Only the colour variables change - every component already uses them */
+[data-theme="dark"] {
+    --color-bg: #121212;
+    --color-surface: #1E1E1E;
+    --color-text: #F2F2F2;
+    --color-text-muted: #B5B5B5;
+    --color-border: #333333;
+    color-scheme: dark;   /* makes scrollbars and date pickers dark too */
+}
+
 /* ===== Reset ===== */
 *,
 *::before,
@@ -35,6 +46,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 main {
@@ -107,6 +119,10 @@ main {
     width: 40px;
     height: 40px;
     cursor: pointer;
+}
+
+.icon-btn:hover {
+    border-color: var(--color-primary);
 }
 
 /* Hidden on big screens */
