@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Search | Mothale Holdings</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme.js"></script>
+    <script src="js/layout.js" defer></script>
+    <script src="js/search.js" defer></script>
+</head>
+<body>
+<header class="site-header" id="site-header"></header>
+
+<main>
+    <!-- Page heading -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Search</h1>
+            <p>Find information about rentals, deposits, quotes and more.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container search-page">
+            <!-- Big search box -->
+            <form class="search-form" action="search.html" method="get" role="search">
+                <label for="search-input" class="visually-hidden">Search the site</label>
+                <input type="search" id="search-input" name="q" placeholder="e.g. deposit" required>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+            <!-- Filled in by search.js -->
+            <p class="search-summary" id="search-summary" aria-live="polite"></p>
+            <ol class="search-results" id="search-results"></ol>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer" id="site-footer"></footer>
+</body>
+</html>

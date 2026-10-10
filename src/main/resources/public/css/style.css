@@ -64,6 +64,16 @@ main {
     padding: 0 16px;
 }
 
+/* Hidden on screen but still read out by screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
 /* ===== Header ===== */
 .site-header {
     position: sticky;      /* header stays at the top when scrolling */
@@ -79,6 +89,7 @@ main {
     font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
+    white-space: nowrap;   /* keep the name on one line */
 }
 
 /* ===== Navigation ===== */
@@ -98,6 +109,7 @@ main {
 .main-nav a {
     color: var(--color-text);
     text-decoration: none;
+    white-space: nowrap;   /* "Rent a Bike" never splits over two lines */
     font-weight: 500;
     padding: 4px 0;
     border-bottom: 2px solid transparent;
@@ -123,21 +135,50 @@ main {
     width: 40px;
     height: 40px;
     cursor: pointer;
+    display: inline-flex;          /* centres the icon (also for <a> icons) */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
 .icon-btn:hover {
     border-color: var(--color-primary);
 }
 
+/* Small search box in the header (desktop) */
+.header-search input {
+    width: 160px;
+    height: 40px;
+    padding: 0 12px;
+    font: inherit;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.header-search input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(245, 163, 0, 0.3);
+}
+
 /* Hidden on big screens */
-.menu-toggle {
+.menu-toggle,
+.search-link {
     display: none;
 }
 
-/* ===== Mobile: screens 768px and smaller ===== */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: inline-block;
+/* ===== Mobile and tablet header: screens 900px and smaller ===== */
+@media (max-width: 900px) {
+    .menu-toggle,
+    .search-link {
+        display: inline-flex;
+    }
+
+    /* Header search box is replaced by the search icon */
+    .header-search {
+        display: none;
     }
 
     .main-nav {
@@ -342,6 +383,52 @@ main {
 .last-updated {
     color: var(--color-text-muted);
     font-size: 0.9rem;
+}
+
+/* ===== Search page ===== */
+.search-page {
+    max-width: 800px;
+}
+
+/* Big search box + button side by side */
+.search-form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    font: inherit;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(245, 163, 0, 0.3);
+}
+
+.search-form button {
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+}
+
+.search-summary {
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+}
+
+.search-results {
+    list-style: none;
 }
 
 /* ===== About page ===== */

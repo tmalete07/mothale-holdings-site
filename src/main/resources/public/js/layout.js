@@ -29,6 +29,13 @@ function renderHeader() {
                 <ul>${buildNavLinks()}</ul>
             </nav>
             <div class="header-actions">
+                <!-- Search box (desktop): sends the visitor to search.html?q=their+words -->
+                <form class="header-search" action="search.html" method="get" role="search">
+                    <label for="header-search-input" class="visually-hidden">Search the site</label>
+                    <input type="search" id="header-search-input" name="q" placeholder="Search..." required>
+                </form>
+                <!-- Search icon (mobile): opens the search page -->
+                <a href="search.html" class="icon-btn search-link" aria-label="Search the site">🔍</a>
                 <button type="button" class="icon-btn menu-toggle" id="menu-toggle"
                         aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
             </div>
