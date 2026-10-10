@@ -296,6 +296,46 @@ main {
     margin-bottom: 16px;
 }
 
+/* ===== Page header (top banner on inner pages) ===== */
+.page-header {
+    background-color: var(--color-surface);
+    padding: 48px 0;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+}
+
+.page-header p {
+    color: var(--color-text-muted);
+}
+
+/* ===== About page ===== */
+/* Two columns on desktop, one on phone */
+.two-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+}
+
+.two-col h2 {
+    margin-bottom: 12px;
+}
+
+.prose p {
+    margin-bottom: 16px;
+}
+
+.info-list {
+    list-style: none;
+}
+
+.info-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
 /* ===== Buttons ===== */
 .btn {
     display: inline-block;
