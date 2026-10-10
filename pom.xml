@@ -31,4 +31,18 @@
             <version>2.0.16</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Lets us start the website with: mvn compile exec:java -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>za.co.mothaleholdings.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
