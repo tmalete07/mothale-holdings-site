@@ -71,7 +71,8 @@ function renderFooter() {
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; ${year} Mothale Holdings (Pty) Ltd &middot; Enterprise No. 2026/503839/07</p>
+                <p>&copy; ${year} Mothale Holdings (Pty) Ltd &middot; Enterprise No. 2026/503839/07
+                   &middot; <a href="privacy.html">Privacy Policy</a></p>
             </div>
         </div>`;
 }

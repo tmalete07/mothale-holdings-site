@@ -315,6 +315,35 @@ main {
     color: var(--color-text-muted);
 }
 
+/* ===== Text pages (e.g. Privacy Policy) ===== */
+/* Narrower column so long text is easier to read */
+.legal-page {
+    max-width: 800px;
+}
+
+.legal-page h2 {
+    font-size: 1.3rem;
+    margin: 32px 0 12px;
+}
+
+.legal-page ul {
+    padding-left: 24px;
+    margin-bottom: 16px;
+}
+
+.legal-page li {
+    margin-bottom: 6px;
+}
+
+.legal-page a {
+    color: var(--color-accent);
+}
+
+.last-updated {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
 /* ===== About page ===== */
 /* Two columns on desktop, one on phone */
 .two-col {
