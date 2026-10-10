@@ -56,6 +56,32 @@ main {
     text-decoration: none;
 }
 
+/* ===== Navigation ===== */
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+}
+
+.main-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    border-bottom-color: var(--color-primary);
+}
+
 /* ===== Hero ===== */
 .hero {
     background-color: var(--color-surface);
@@ -101,28 +127,4 @@ main {
     padding: 24px 0;
     text-align: center;
     font-size: 0.9rem;
-}
-/* ===== Navigation ===== */
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-}
-
-.main-nav a {
-    color: var(--color-text);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 4px 0;
-    border-bottom: 2px solid transparent;
-}
-
-.main-nav a:hover {
-    border-bottom-color: var(--color-primary);
 }

@@ -7,8 +7,17 @@ const NAV_LINKS = [
     { href: "contact.html", label: "Contact Us" }
 ];
 
+function getCurrentPage() {
+    const page = window.location.pathname.split("/").pop();
+    return page === "" ? "index.html" : page;
+}
+
 function buildNavLinks() {
-    return NAV_LINKS.map(link => `<li><a href="${link.href}">${link.label}</a></li>`).join("");
+    return NAV_LINKS.map(link => {
+        const isActive = link.href === getCurrentPage();
+        const activeAttrs = isActive ? ' class="active" aria-current="page"' : "";
+        return `<li><a href="${link.href}"${activeAttrs}>${link.label}</a></li>`;
+    }).join("");
 }
 
 function renderHeader() {
