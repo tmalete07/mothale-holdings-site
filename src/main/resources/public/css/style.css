@@ -267,6 +267,19 @@ main {
     margin-bottom: 4px;
 }
 
+/* ===== Call-to-action band ===== */
+.cta-band {
+    background-color: var(--color-primary);
+    color: #1F1F1F;
+    text-align: center;
+    padding: 48px 0;
+}
+
+.cta-band h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 16px;
+}
+
 /* ===== Buttons ===== */
 .btn {
     display: inline-block;
@@ -296,6 +309,16 @@ main {
 .btn-outline:hover {
     background-color: var(--color-primary);
     color: #1F1F1F;
+}
+
+/* Dark button - used on yellow backgrounds */
+.btn-dark {
+    background-color: #1F1F1F;
+    color: #FFFFFF;
+}
+
+.btn-dark:hover {
+    background-color: #000000;
 }
 
 /* ===== Footer ===== */
