@@ -25,10 +25,28 @@ function renderHeader() {
     header.innerHTML = `
         <div class="container header-inner">
             <a href="index.html" class="logo">Mothale Holdings</a>
-            <nav class="main-nav" aria-label="Main navigation">
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
                 <ul>${buildNavLinks()}</ul>
             </nav>
+            <div class="header-actions">
+                <button type="button" class="icon-btn menu-toggle" id="menu-toggle"
+                        aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">☰</button>
+            </div>
         </div>`;
+
+    setupMobileMenu();
+}
+
+function setupMobileMenu() {
+    const menuButton = document.getElementById("menu-toggle");
+    const nav = document.getElementById("main-nav");
+
+    menuButton.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+        menuButton.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+        menuButton.textContent = isOpen ? "✕" : "☰";
+    });
 }
 
 renderHeader();

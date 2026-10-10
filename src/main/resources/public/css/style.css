@@ -6,6 +6,7 @@
     --color-surface: #FFF6E5;      /* soft cream for sections */
     --color-text: #1F1F1F;
     --color-text-muted: #5A5A5A;
+    --color-border: #E8E8E8;
 
     --radius: 8px;
     --max-width: 1100px;
@@ -44,6 +45,9 @@ main {
 
 /* ===== Header ===== */
 .site-header {
+    position: sticky;      /* header stays at the top when scrolling */
+    top: 0;
+    z-index: 100;
     background-color: var(--color-bg);
     border-bottom: 3px solid var(--color-primary);
     padding: 16px 0;
@@ -61,6 +65,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
 }
 
 .main-nav ul {
@@ -80,6 +85,60 @@ main {
 .main-nav a:hover,
 .main-nav a.active {
     border-bottom-color: var(--color-primary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+/* Hidden on big screens */
+.menu-toggle {
+    display: none;
+}
+
+/* ===== Mobile: screens 768px and smaller ===== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: inline-block;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-bg);
+        border-bottom: 3px solid var(--color-primary);
+    }
+
+    .main-nav.open {
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 16px 16px;
+    }
+
+    .main-nav a {
+        display: block;
+        padding: 12px 0;
+    }
 }
 
 /* ===== Hero ===== */
