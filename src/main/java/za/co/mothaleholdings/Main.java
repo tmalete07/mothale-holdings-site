@@ -34,6 +34,9 @@ public class Main {
         // API: Rent a Bike enquiries
         app.post("/api/enquiries", EnquiryController::create);
 
+        // API: Contact Us messages
+        app.post("/api/contact", ContactController::create);
+
         // Unknown page -> show our own 404 page (status stays 404)
         app.error(404, ctx -> ctx.html(loadPage("/public/404.html")));
 
