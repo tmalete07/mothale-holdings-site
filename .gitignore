@@ -13,3 +13,6 @@ Thumbs.db
 
 # Secrets - never commit these
 .env
+
+# Backup files with customers' personal information (POPIA) - never commit
+data/

@@ -17,25 +17,32 @@ public class Main {
     private static final int DEFAULT_PORT = 7070;
 
     public static void main(String[] args) {
+        EmailService emailService = EmailService.fromEnvironment();
+        if (emailService.isConfigured()) {
+            System.out.println("Email is ON - company inbox: " + emailService.companyInbox());
+        } else {
+            System.out.println("Email is OFF - set MAIL_USERNAME and MAIL_PASSWORD to send emails.");
+        }
+
         int port = getPort();
-        createApp().start(port);
+        createApp(emailService).start(port);
         System.out.println("Website running at http://localhost:" + port);
     }
 
     /**
      * Builds the Javalin app. Kept separate from main() so tests can start it later.
      */
-    public static Javalin createApp() {
+    public static Javalin createApp(EmailService emailService) {
         Javalin app = Javalin.create(config -> {
             // Everything in src/main/resources/public is served as the website
             config.staticFiles.add("/public", Location.CLASSPATH);
         });
 
         // API: Rent a Bike enquiries
-        app.post("/api/enquiries", EnquiryController::create);
+        app.post("/api/enquiries", ctx -> EnquiryController.create(ctx, emailService));
 
         // API: Contact Us messages
-        app.post("/api/contact", ContactController::create);
+        app.post("/api/contact", ctx -> ContactController.create(ctx, emailService));
 
         // Unknown page -> show our own 404 page (status stays 404)
         app.error(404, ctx -> ctx.html(loadPage("/public/404.html")));

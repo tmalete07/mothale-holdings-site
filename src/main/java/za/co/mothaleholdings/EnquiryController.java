@@ -14,11 +14,13 @@ public final class EnquiryController {
     // Use South African time, even if the server runs somewhere else
     private static final ZoneId SA_TIME = ZoneId.of("Africa/Johannesburg");
 
+    private static final String COMPANY_EMAIL = "mothalestockvel@gmail.com";
+
     private EnquiryController() {
         // Only static methods
     }
 
-    public static void create(Context ctx) {
+    public static void create(Context ctx, EmailService emailService) {
         Enquiry enquiry;
         try {
             enquiry = ctx.bodyAsClass(Enquiry.class);
@@ -38,6 +40,23 @@ public final class EnquiryController {
 
         // POPIA: only log the name, not all the personal details
         System.out.println("New enquiry received from " + enquiry.fullName());
+
+        // 1. Tell the company. Reply-To = customer, so the company can just click "Reply".
+        boolean companyNotified = emailService.trySend(
+                emailService.companyInbox(),
+                EmailTemplates.enquiryNotification(enquiry),
+                enquiry.email().trim());
+
+        if (!companyNotified) {
+            // Keep the enquiry so it is not lost (BRD H-02)
+            BackupStore.save("unsent-enquiries.jsonl", ctx.body());
+        }
+
+        // 2. Acknowledge the customer - sent even if step 1 failed (BRD H-02)
+        emailService.trySend(
+                enquiry.email().trim(),
+                EmailTemplates.enquiryAcknowledgement(enquiry),
+                COMPANY_EMAIL);
 
         ctx.status(201).json(Map.of("message", "Thank you, your enquiry has been received."));
     }

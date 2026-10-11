@@ -13,7 +13,7 @@ public final class ContactController {
         // Only static methods
     }
 
-    public static void create(Context ctx) {
+    public static void create(Context ctx, EmailService emailService) {
         ContactMessage contactMessage;
         try {
             contactMessage = ctx.bodyAsClass(ContactMessage.class);
@@ -33,6 +33,17 @@ public final class ContactController {
 
         // POPIA: only log the name, not all the personal details
         System.out.println("New contact message received from " + contactMessage.name());
+
+        // Send to the company. Reply-To = visitor, so the company can just click "Reply".
+        boolean companyNotified = emailService.trySend(
+                emailService.companyInbox(),
+                EmailTemplates.contactNotification(contactMessage),
+                contactMessage.email().trim());
+
+        if (!companyNotified) {
+            // Keep the message so it is not lost (BRD H-02)
+            BackupStore.save("unsent-contact-messages.jsonl", ctx.body());
+        }
 
         ctx.status(201).json(Map.of("message", "Thank you for getting in touch. We'll get back to you soon."));
     }
