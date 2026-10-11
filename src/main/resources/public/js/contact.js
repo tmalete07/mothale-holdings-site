@@ -1,6 +1,7 @@
 // Contact Us page (BRD Module E).
 // 1. Fills in the contact details and social links from config.js
 // 2. Validates the contact form (same behaviour as the Rent a Bike form)
+// 3. Sends the message to the Java server (POST /api/contact) and shows the result
 
 // ===== 1. Contact details and social links =====
 
@@ -32,10 +33,20 @@ renderSocialLinks();
 
 // ===== 2. Contact form =====
 
+const MAX_MESSAGE_LENGTH = 2000;   // same limit as ContactMessage.java
+
 const contactForm = document.getElementById("contact-form");
 const contactSubmitButton = document.getElementById("contact-submit");
 const contactSubmitHint = document.getElementById("contact-submit-hint");
 const contactSuccessMessage = document.getElementById("contact-success");
+
+// Message box for problems sending the form (e.g. server offline).
+// Created here so contact.html does not need to change.
+const contactFormError = document.createElement("p");
+contactFormError.className = "error";
+contactFormError.setAttribute("role", "alert");
+contactFormError.hidden = true;
+contactSubmitButton.before(contactFormError);
 
 // One rule per field: returns an error message, or "" when the value is fine
 const contactRules = {
@@ -53,8 +64,12 @@ const contactRules = {
             ? ""
             : "Please enter a valid South African cell number, e.g. 082 123 4567 or +27 82 123 4567.",
 
-    message: value =>
-        Validation.isNotBlank(value) ? "" : "Please enter your message.",
+    message: value => {
+        if (!Validation.isNotBlank(value)) return "Please enter your message.";
+        return value.length <= MAX_MESSAGE_LENGTH
+            ? ""
+            : `Please keep your message to ${MAX_MESSAGE_LENGTH} characters or fewer.`;
+    },
 
     consent: isChecked =>
         isChecked ? "" : "Please agree to the Privacy Policy so we can respond to your message."
@@ -65,14 +80,18 @@ function getContactValue(field) {
     return field.type === "checkbox" ? field.checked : field.value;
 }
 
-// Checks one field AND shows/clears its error message
-function validateContactField(field) {
-    const message = contactRules[field.name](getContactValue(field));
+// Shows (or clears, when message is "") the error under one field
+function showContactFieldError(field, message) {
     const errorElement = document.getElementById(`${field.name}-error`);
-
     errorElement.textContent = message;
     field.classList.toggle("invalid", message !== "");
     field.setAttribute("aria-invalid", String(message !== ""));
+}
+
+// Checks one field AND shows/clears its error message
+function validateContactField(field) {
+    const message = contactRules[field.name](getContactValue(field));
+    showContactFieldError(field, message);
     return message === "";
 }
 
@@ -88,6 +107,67 @@ function updateContactSubmitButton() {
     const ready = isContactFormValid();
     contactSubmitButton.disabled = !ready;
     contactSubmitHint.hidden = ready;
+}
+
+// Builds the JSON the server expects (consent as true/false, not "on")
+function buildContactMessage() {
+    const contactMessage = {};
+    Object.keys(contactRules).forEach(name => {
+        contactMessage[name] = getContactValue(contactForm.elements[name]);
+    });
+    return contactMessage;
+}
+
+function showContactFormError(message) {
+    contactFormError.textContent = message;
+    contactFormError.hidden = false;
+}
+
+// Sends the message to Java. Returns nothing - updates the page instead.
+async function sendContactMessage() {
+    contactSubmitButton.disabled = true;
+    contactSubmitButton.textContent = "Sending...";
+    contactFormError.hidden = true;
+
+    try {
+        const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(buildContactMessage())
+        });
+
+        if (response.status === 201) {
+            contactForm.hidden = true;
+            contactSuccessMessage.hidden = false;
+            contactSuccessMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+        }
+
+        if (response.status === 400) {
+            // The server found problems - show each one under its field
+            const body = await response.json();
+            const errors = body.errors || {};
+            Object.keys(errors).forEach(name => {
+                const field = contactForm.elements[name];
+                if (field) {
+                    showContactFieldError(field, errors[name]);
+                }
+            });
+            showContactFormError(body.message || "Please fix the highlighted fields.");
+            return;
+        }
+
+        showContactFormError("Sorry, something went wrong on our side. Please try again in a few minutes.");
+    } catch (error) {
+        // No response at all - server offline or no internet
+        showContactFormError("We couldn't send your message. Please check your internet connection and try again.");
+    } finally {
+        // The visitor's answers are kept, so they can just try again (BRD I-03)
+        contactSubmitButton.textContent = "Send Message";
+        if (!contactForm.hidden) {
+            updateContactSubmitButton();
+        }
+    }
 }
 
 // Connect each field to its rule
@@ -124,13 +204,7 @@ contactForm.addEventListener("submit", event => {
         return;
     }
 
-    // Step 11: this data will be sent to the Java backend.
-    const contactMessage = Object.fromEntries(new FormData(contactForm));
-    console.log("Message ready to send:", contactMessage);
-
-    contactForm.hidden = true;
-    contactSuccessMessage.hidden = false;
-    contactSuccessMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+    sendContactMessage();
 });
 
 // Set the correct button state when the page first loads
