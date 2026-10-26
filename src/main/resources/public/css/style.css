@@ -350,6 +350,25 @@ svg.lucide {
     gap: 12px;
 }
 
+/* Large round icon above a heading (404 page) */
+.big-icon {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-accent);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.big-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
 /* ===== Home page hero: headline + scooter on the road ===== */
 .home-hero {
     position: relative;
@@ -764,6 +783,13 @@ svg.lucide {
     padding: 28px;
 }
 
+.no-results svg {
+    width: 36px;
+    height: 36px;
+    color: var(--color-accent-text);
+    margin-bottom: 8px;
+}
+
 .no-results h2 {
     font-size: 1.4rem;
     margin-bottom: 8px;
@@ -1038,6 +1064,34 @@ svg.lucide {
     margin-bottom: 8px;
 }
 
+.info-box h3 {
+    font-size: 1.15rem;
+    margin: 24px 0 12px;
+}
+
+/* List with a green icon in front of each line (Rent a Bike info box) */
+.icon-list {
+    list-style: none;
+}
+
+.info-box .icon-list {
+    padding-left: 0;
+}
+
+.icon-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.icon-list svg {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    color: var(--color-primary);
+}
+
 /* ===== Contact page ===== */
 /* Right-hand column: details, social links, map */
 .contact-aside h2 {
@@ -1051,8 +1105,19 @@ svg.lucide {
 }
 
 .contact-details li {
-    padding: 10px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
     border-bottom: 1px solid var(--color-border);
+}
+
+/* Green icon in front of each contact detail */
+.contact-details svg {
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    color: var(--color-primary);
 }
 
 .contact-details a {
@@ -1063,7 +1128,7 @@ svg.lucide {
     color: var(--color-primary);
 }
 
-/* Social media buttons */
+/* Social media buttons with the official logos */
 .social-links {
     display: flex;
     flex-wrap: wrap;
@@ -1075,18 +1140,63 @@ svg.lucide {
 .social-links a {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 18px;
+    gap: 10px;
+    padding: 8px 18px 8px 10px;
     border: 2px solid var(--color-border);
     border-radius: 999px;
     color: var(--color-text);
     text-decoration: none;
     font-weight: 600;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.social-links a:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+/* Logo sits in a small white circle so it is clear in light AND dark mode.
+   Grey by default, full brand colours on hover. */
+.social-links img {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    filter: grayscale(1);
+    opacity: 0.75;
+    transition: filter 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover (and keyboard focus): brand colour, slightly bigger and bolder */
+.social-links a:hover,
+.social-links a:focus-visible {
+    border-color: var(--brand);
+    color: var(--brand);
+    transform: translateY(-2px);
+}
+
+.social-links a:hover img,
+.social-links a:focus-visible img {
+    filter: none;
+    opacity: 1;
+    transform: scale(1.12);
+}
+
+/* Looks bolder without changing the text width (so nothing jumps) */
+.social-links a:hover span,
+.social-links a:focus-visible span {
+    text-shadow: 0 0 0.6px currentColor, 0 0 0.6px currentColor;
+}
+
+/* No movement for people who turn animations off */
+@media (prefers-reduced-motion: reduce) {
+    .social-links a,
+    .social-links img {
+        transition: none;
+    }
+
+    .social-links a:hover,
+    .social-links a:focus-visible,
+    .social-links a:hover img,
+    .social-links a:focus-visible img {
+        transform: none;
+    }
 }
 
 /* Google map */

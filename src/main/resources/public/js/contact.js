@@ -14,22 +14,51 @@ function renderContactDetails() {
         ? `<a href="https://wa.me/${SITE_CONFIG.whatsapp}" target="_blank" rel="noopener">Chat on WhatsApp</a>`
         : "Coming soon";
 
+    // Each line: a Lucide icon, then the text
     document.getElementById("contact-details").innerHTML = `
-        <li><strong>Address:</strong> ${SITE_CONFIG.address}</li>
-        <li><strong>Email:</strong> <a href="mailto:${SITE_CONFIG.email}">${SITE_CONFIG.email}</a></li>
-        <li><strong>Phone:</strong> ${phoneHtml}</li>
-        <li><strong>WhatsApp:</strong> ${whatsappHtml}</li>`;
+        <li><i data-lucide="map-pin" aria-hidden="true"></i>
+            <span><strong>Address:</strong> ${SITE_CONFIG.address}</span></li>
+        <li><i data-lucide="mail" aria-hidden="true"></i>
+            <span><strong>Email:</strong> <a href="mailto:${SITE_CONFIG.email}">${SITE_CONFIG.email}</a></span></li>
+        <li><i data-lucide="phone" aria-hidden="true"></i>
+            <span><strong>Phone:</strong> ${phoneHtml}</span></li>
+        <li><i data-lucide="message-circle" aria-hidden="true"></i>
+            <span><strong>WhatsApp:</strong> ${whatsappHtml}</span></li>`;
 }
 
 function renderSocialLinks() {
+    const links = [...SITE_CONFIG.socials];
+
+    // WhatsApp only shows once a number is set in config.js
+    if (SITE_CONFIG.whatsapp) {
+        links.push({
+            name: "WhatsApp",
+            url: `https://wa.me/${SITE_CONFIG.whatsapp}`,
+            icon: SITE_CONFIG.whatsappIcon.icon,
+            color: SITE_CONFIG.whatsappIcon.color
+        });
+    }
+
     // target="_blank" opens the profile in a new tab (BRD E-02)
-    document.getElementById("social-links").innerHTML = SITE_CONFIG.socials
-        .map(social => `<li><a href="${social.url}" target="_blank" rel="noopener">${social.name}</a></li>`)
+    // --brand passes each platform's colour to the CSS hover effect
+    document.getElementById("social-links").innerHTML = links
+        .map(social => `
+            <li>
+                <a href="${social.url}" target="_blank" rel="noopener" style="--brand: ${social.color}">
+                    <img src="${social.icon}" alt="" width="22" height="22">
+                    <span>${social.name}</span>
+                </a>
+            </li>`)
         .join("");
 }
 
 renderContactDetails();
 renderSocialLinks();
+
+// Draw the new icons (refreshIcons is defined in layout.js)
+if (typeof refreshIcons === "function") {
+    refreshIcons();
+}
 
 // ===== 2. Contact form =====
 

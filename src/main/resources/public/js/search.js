@@ -86,6 +86,11 @@ function showNoResults(searchTerm) {
     const box = document.createElement("li");
     box.className = "no-results";
 
+    // Lucide "search-x" icon (drawn by refreshIcons below)
+    const icon = document.createElement("i");
+    icon.setAttribute("data-lucide", "search-x");
+    icon.setAttribute("aria-hidden", "true");
+
     const heading = document.createElement("h2");
     heading.textContent = `No results found for "${searchTerm}"`;
 
@@ -99,8 +104,12 @@ function showNoResults(searchTerm) {
     contactLink.textContent = "Contact us";
     contact.append(contactLink, " and we'll help.");
 
-    box.append(heading, tips, contact);
+    box.append(icon, heading, tips, contact);
     resultsList.append(box);
+
+    if (typeof refreshIcons === "function") {
+        refreshIcons();   // defined in layout.js
+    }
 }
 
 function runSearchPage() {

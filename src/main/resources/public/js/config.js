@@ -7,9 +7,14 @@ const SITE_CONFIG = {
     phone: "",      // e.g. "011 123 4567" - still to be supplied by the company
     whatsapp: "",   // international format, digits only, e.g. "27821234567"
 
-    // To add a platform later (Instagram, LinkedIn...), add one line here
+    // To add a platform later (Instagram, LinkedIn...), add one line here.
+    // icon  = the official logo file in images/social/ (downloaded from the platform's brand page)
+    // color = the brand colour shown when the visitor hovers over the button
     socials: [
-        { name: "Facebook", url: "https://www.facebook.com/" },   // replace with the company's page
-        { name: "TikTok", url: "https://www.tiktok.com/" }        // replace with the company's profile
-    ]
+        { name: "Facebook", url: "https://www.facebook.com/", icon: "images/social/facebook.png", color: "#0866FF" },   // replace url with the company's page
+        { name: "TikTok", url: "https://www.tiktok.com/", icon: "images/social/tiktok.png", color: "#FE2C55" }          // replace url with the company's profile
+    ],
+
+    // Used for the WhatsApp button - it only appears once a WhatsApp number is filled in above
+    whatsappIcon: { icon: "images/social/whatsapp.png", color: "#25D366" }
 };
