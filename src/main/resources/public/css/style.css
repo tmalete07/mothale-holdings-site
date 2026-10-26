@@ -26,6 +26,12 @@
     /* Focus glow for fields and buttons */
     --focus-ring: 0 0 0 3px rgba(31, 90, 46, 0.25);
 
+    /* Scooter illustration on the home page */
+    --scooter-ink: #1C2420;
+    --scooter-tyre-edge: transparent;
+    --scooter-speed: #C9D2C8;
+    --road: #2A3230;
+
     --font-heading: "Fraunces", Georgia, serif;
     --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 
@@ -54,6 +60,12 @@
     --btn-hover: #E2B84A;
 
     --focus-ring: 0 0 0 3px rgba(212, 166, 58, 0.35);
+
+    /* Darker scooter parts get a light edge so they show on the dark background */
+    --scooter-ink: #0B100D;
+    --scooter-tyre-edge: #5C6A60;
+    --scooter-speed: #2F3B33;
+    --road: #26302A;
     color-scheme: dark;   /* makes scrollbars and date pickers dark too */
 }
 
@@ -334,6 +346,135 @@ svg.lucide {
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
+}
+
+/* ===== Home page hero: headline + scooter on the road ===== */
+.home-hero {
+    padding-top: 64px;
+    overflow: hidden;
+}
+
+.home-hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 32px;
+    align-items: end;
+}
+
+.home-hero-text {
+    padding-bottom: 56px;
+}
+
+.home-hero h1 {
+    font-size: clamp(2.6rem, 5.6vw, 4.4rem);
+    line-height: 1.04;
+}
+
+.home-hero-lead {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    margin: 20px 0 26px;
+    max-width: 36ch;
+}
+
+/* "R650 per week" with a gold bar on the left */
+.home-hero-price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    margin-bottom: 28px;
+    padding-left: 14px;
+    border-left: 4px solid var(--color-accent);
+}
+
+.home-hero-price strong {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    line-height: 1;
+}
+
+.home-hero-price span {
+    color: var(--color-text-muted);
+}
+
+.home-hero .hero-actions {
+    justify-content: flex-start;
+}
+
+.home-hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: -26px;   /* wheels sit on the road */
+    animation: ride-in 0.9s ease-out both;
+}
+
+/* The scooter rides in once when the page opens */
+@keyframes ride-in {
+    from {
+        transform: translateX(-60px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* No movement for people who turn animations off on their device */
+@media (prefers-reduced-motion: reduce) {
+    .home-hero-art svg {
+        animation: none;
+    }
+}
+
+/* Dark road with gold dashed lane markings */
+.road {
+    height: 56px;
+    background-color: var(--road);
+    position: relative;
+}
+
+.road::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 6px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(90deg, var(--color-accent) 0 46px, transparent 46px 72px);
+}
+
+@media (max-width: 860px) {
+    .home-hero {
+        padding-top: 40px;
+    }
+
+    .home-hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .home-hero-text {
+        padding-bottom: 8px;
+    }
+}
+
+/* ===== Benefits row (icon, heading, text - no boxes) ===== */
+.benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px 32px;
+}
+
+.benefit h3 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+}
+
+.benefit p {
+    color: var(--color-text-muted);
 }
 
 /* ===== Sections (reused on every page) ===== */

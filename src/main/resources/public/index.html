@@ -13,41 +13,114 @@
 <header class="site-header" id="site-header"></header>
 
 <main>
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <h1>Scooters for delivery drivers</h1>
-            <p>Rent a reliable scooter and start earning with Uber Eats, Mr D and more.</p>
-            <p class="hero-price">Rentals from R650 per week</p>
-            <div class="hero-actions">
-                <a href="rent.html" class="btn btn-primary">Rent a Bike</a>
-                <a href="#how-it-works" class="btn btn-outline">How it works</a>
+    <!-- Hero: headline on the left, scooter riding on the road on the right -->
+    <section class="home-hero">
+        <div class="container home-hero-grid">
+            <div class="home-hero-text">
+                <h1>Rent a scooter. Start delivering this week.</h1>
+                <p class="home-hero-lead">Delivery-ready scooters for Uber Eats and Mr D drivers in Springs
+                    and the East Rand.</p>
+                <p class="home-hero-price">
+                    <strong>R650</strong>
+                    <span>per week, plus a once-off R350 deposit</span>
+                </p>
+                <div class="hero-actions">
+                    <a href="rent.html" class="btn btn-primary">
+                        <i data-lucide="motorbike" aria-hidden="true"></i> Rent a Bike
+                    </a>
+                    <a href="#how-it-works" class="btn btn-outline">
+                        <i data-lucide="route" aria-hidden="true"></i> How it works
+                    </a>
+                </div>
+            </div>
+
+            <!-- Illustration drawn in SVG (original artwork - colours come from style.css) -->
+            <div class="home-hero-art">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" role="img"
+                     aria-labelledby="scooter-title">
+                    <title id="scooter-title">A gold delivery scooter with a green delivery box</title>
+                    <!-- speed lines -->
+                    <g stroke="var(--scooter-speed)" stroke-width="6" stroke-linecap="round">
+                        <line x1="8" y1="150" x2="58" y2="150"/>
+                        <line x1="0" y1="190" x2="40" y2="190"/>
+                        <line x1="18" y1="230" x2="54" y2="230"/>
+                    </g>
+                    <!-- delivery box -->
+                    <rect x="72" y="58" width="128" height="104" rx="10" fill="#1F5A2E"/>
+                    <rect x="72" y="58" width="128" height="22" rx="10" fill="#17452A"/>
+                    <rect x="72" y="70" width="128" height="10" fill="#17452A"/>
+                    <rect x="96" y="104" width="80" height="12" rx="6" fill="#FFFFFF" opacity="0.9"/>
+                    <rect x="110" y="126" width="52" height="8" rx="4" fill="#FFFFFF" opacity="0.6"/>
+                    <rect x="92" y="162" width="88" height="10" rx="3" fill="var(--scooter-ink)"/>
+                    <!-- rear body -->
+                    <path d="M60 252 C60 212 96 176 150 172 L282 172 C300 172 306 186 300 204 L286 256 Z"
+                          fill="#D4A63A"/>
+                    <path d="M74 244 C84 214 112 196 150 194 L270 194" fill="none" stroke="#E9C76A"
+                          stroke-width="8" stroke-linecap="round"/>
+                    <!-- seat -->
+                    <path d="M134 172 C134 156 146 150 160 150 L262 150 C276 150 282 160 278 172 Z"
+                          fill="var(--scooter-ink)"/>
+                    <!-- floorboard -->
+                    <rect x="236" y="250" width="132" height="18" rx="9" fill="var(--scooter-ink)"/>
+                    <!-- leg shield -->
+                    <path d="M352 268 L388 120 L420 120 L398 230 C394 252 380 268 362 268 Z" fill="#D4A63A"/>
+                    <!-- steering column, handlebar and headlight -->
+                    <line x1="408" y1="120" x2="452" y2="276" stroke="var(--scooter-ink)" stroke-width="12"
+                          stroke-linecap="round"/>
+                    <line x1="378" y1="96" x2="436" y2="96" stroke="var(--scooter-ink)" stroke-width="10"
+                          stroke-linecap="round"/>
+                    <line x1="404" y1="96" x2="408" y2="122" stroke="var(--scooter-ink)" stroke-width="10"
+                          stroke-linecap="round"/>
+                    <circle cx="434" cy="122" r="13" fill="#FFF3C4" stroke="var(--scooter-ink)" stroke-width="6"/>
+                    <!-- front mudguard -->
+                    <path d="M398 262 A56 56 0 0 1 508 262" fill="none" stroke="#D4A63A" stroke-width="14"
+                          stroke-linecap="round"/>
+                    <!-- wheels -->
+                    <circle cx="136" cy="280" r="50" fill="var(--scooter-ink)" stroke="var(--scooter-tyre-edge)"
+                            stroke-width="4"/>
+                    <circle cx="136" cy="280" r="26" fill="#8A9099"/>
+                    <circle cx="136" cy="280" r="8" fill="var(--scooter-ink)"/>
+                    <circle cx="452" cy="280" r="50" fill="var(--scooter-ink)" stroke="var(--scooter-tyre-edge)"
+                            stroke-width="4"/>
+                    <circle cx="452" cy="280" r="26" fill="#8A9099"/>
+                    <circle cx="452" cy="280" r="8" fill="var(--scooter-ink)"/>
+                    <!-- exhaust -->
+                    <rect x="150" y="262" width="70" height="12" rx="6" fill="#8A9099"/>
+                </svg>
             </div>
         </div>
+
+        <!-- The road with gold lane markings -->
+        <div class="road" aria-hidden="true"></div>
     </section>
 
-    <!-- Why choose us -->
+    <!-- Why ride with us -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">Why ride with Mothale Holdings?</h2>
             <p class="section-subtitle">Built for drivers who want to start earning without buying a scooter.</p>
 
-            <div class="card-grid">
-                <article class="card">
-                    <div class="card-icon" aria-hidden="true">🛵</div>
+            <div class="benefits">
+                <div class="benefit">
+                    <div class="card-icon"><i data-lucide="package" aria-hidden="true"></i></div>
                     <h3>Ready for delivery work</h3>
                     <p>Our scooters are rented to drivers working on platforms like Uber Eats and Mr D.</p>
-                </article>
-                <article class="card">
-                    <div class="card-icon" aria-hidden="true">💰</div>
-                    <h3>Simple weekly pricing</h3>
-                    <p>A minimum weekly rental of R650, plus a once-off R350 deposit that is refunded when your rental ends.</p>
-                </article>
-                <article class="card">
-                    <div class="card-icon" aria-hidden="true">⚡</div>
+                </div>
+                <div class="benefit">
+                    <div class="card-icon"><i data-lucide="wallet" aria-hidden="true"></i></div>
+                    <h3>One weekly payment</h3>
+                    <p>R650 a week, due by Wednesday 23:59. No big amount to pay upfront.</p>
+                </div>
+                <div class="benefit">
+                    <div class="card-icon"><i data-lucide="wrench" aria-hidden="true"></i></div>
+                    <h3>We handle servicing</h3>
+                    <p>We service your scooter every 6 months or 3000 km, so you can keep riding.</p>
+                </div>
+                <div class="benefit">
+                    <div class="card-icon"><i data-lucide="clock" aria-hidden="true"></i></div>
                     <h3>Quick quotes</h3>
                     <p>Send an enquiry online and receive your formal quote within 2 business days.</p>
-                </article>
+                </div>
             </div>
         </div>
     </section>
@@ -83,7 +156,9 @@
     <section class="cta-band">
         <div class="container">
             <h2>Ready to start earning?</h2>
-            <a href="rent.html" class="btn btn-dark">Send an enquiry</a>
+            <a href="rent.html" class="btn btn-dark">
+                <i data-lucide="send" aria-hidden="true"></i> Send an enquiry
+            </a>
         </div>
     </section>
 </main>
