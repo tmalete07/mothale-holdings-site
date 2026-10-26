@@ -31,6 +31,7 @@
     --scooter-tyre-edge: transparent;
     --scooter-speed: #C9D2C8;
     --road: #2A3230;
+    --hero-pattern: #D5DED4;         /* faint delivery icons behind the hero */
 
     --font-heading: "Fraunces", Georgia, serif;
     --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
@@ -66,6 +67,7 @@
     --scooter-tyre-edge: #5C6A60;
     --scooter-speed: #2F3B33;
     --road: #26302A;
+    --hero-pattern: #213025;
     color-scheme: dark;   /* makes scrollbars and date pickers dark too */
 }
 
@@ -350,11 +352,47 @@ svg.lucide {
 
 /* ===== Home page hero: headline + scooter on the road ===== */
 .home-hero {
+    position: relative;
     padding-top: 64px;
     overflow: hidden;
 }
 
+/* ===== Faint delivery icons behind the hero ===== */
+.hero-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 56px;          /* stop above the road */
+    pointer-events: none;
+    color: var(--hero-pattern);
+}
+
+.hero-pattern svg {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    stroke-width: 1.5;
+}
+
+/* Each icon gets its own spot and tilt so the pattern looks scattered, not like a grid.
+   The left side stays almost empty so the icons never sit behind the headline. */
+.hero-pattern svg:nth-child(1)  { top: 8%;  left: 1%;  transform: rotate(-12deg); }
+.hero-pattern svg:nth-child(2)  { top: 8%;  left: 52%; transform: rotate(14deg); }
+.hero-pattern svg:nth-child(3)  { top: 4%;  left: 66%; transform: rotate(-8deg); }
+.hero-pattern svg:nth-child(4)  { top: 14%; left: 80%; transform: rotate(10deg); }
+.hero-pattern svg:nth-child(5)  { top: 36%; left: 93%; transform: rotate(-16deg); }
+.hero-pattern svg:nth-child(6)  { top: 32%; left: 56%; transform: rotate(8deg); }
+.hero-pattern svg:nth-child(7)  { top: 46%; left: 1%;  transform: rotate(12deg); }
+.hero-pattern svg:nth-child(8)  { top: 26%; left: 72%; transform: rotate(-6deg); }
+.hero-pattern svg:nth-child(9)  { top: 80%; left: 1%;  transform: rotate(-14deg); }
+.hero-pattern svg:nth-child(10) { top: 5%;  left: 93%; transform: rotate(6deg); }
+.hero-pattern svg:nth-child(11) { top: 50%; left: 51%; transform: rotate(18deg); }
+.hero-pattern svg:nth-child(12) { top: 18%; left: 61%; transform: rotate(-4deg); }
+
 .home-hero-grid {
+    position: relative;
+    z-index: 1;            /* text and scooter sit above the background pattern */
     display: grid;
     grid-template-columns: 1.05fr 1fr;
     gap: 32px;
@@ -450,6 +488,11 @@ svg.lucide {
 @media (max-width: 860px) {
     .home-hero {
         padding-top: 40px;
+    }
+
+    /* On phones the text uses the full width, so the pattern would sit behind it - hide it */
+    .hero-pattern {
+        display: none;
     }
 
     .home-hero-grid {
