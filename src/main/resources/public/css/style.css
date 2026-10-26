@@ -1,30 +1,59 @@
-/* ===== Colour palette ===== */
-:root {
-    --color-primary: #F5A300;      /* yellow-orange */
-    --color-accent: #E86F00;       /* deeper orange for hover */
-    --color-bg: #FFFFFF;
-    --color-surface: #FFF6E5;      /* soft cream for sections */
-    --color-text: #1F1F1F;
-    --color-text-muted: #5A5A5A;
-    --color-border: #E8E8E8;
-    --color-error: #D32F2F;
-    --color-success: #2E7D32;
+/* ===== Fonts (Google Fonts) ===== */
+/* Fraunces: headings - a modern serif that matches the classic lettering in the logo */
+/* Source Sans 3: body text - clean and easy to read */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap");
 
-    --radius: 8px;
-    --max-width: 1100px;
-    --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+/* ===== Colour palette (taken from the Mothale Holdings logo) ===== */
+:root {
+    --color-primary: #1F5A2E;        /* forest green - buttons, links, icons */
+    --color-primary-hover: #17452A;  /* darker green for hover */
+    --color-accent: #D4A63A;         /* gold - highlights, underlines, borders */
+    --color-accent-text: #8A6418;    /* darker gold - readable gold text on white */
+    --color-bg: #FFFFFF;
+    --color-surface: #F2F5F1;        /* soft green-grey for alternate sections */
+    --color-text: #1C2420;
+    --color-text-muted: #5B6660;
+    --color-border: #DCE3DB;
+    --color-error: #C62828;
+    --color-success: #2E7D32;
+    --color-footer: #0F2414;         /* deep green footer */
+
+    /* Main button colours (light mode: green button, white text) */
+    --btn-bg: var(--color-primary);
+    --btn-text: #FFFFFF;
+    --btn-hover: var(--color-primary-hover);
+
+    /* Focus glow for fields and buttons */
+    --focus-ring: 0 0 0 3px rgba(31, 90, 46, 0.25);
+
+    --font-heading: "Fraunces", Georgia, serif;
+    --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+
+    --radius: 12px;
+    --max-width: 1120px;
 }
 
 /* ===== Dark mode ===== */
 /* Only the colour variables change - every component already uses them */
 [data-theme="dark"] {
-    --color-bg: #121212;
-    --color-surface: #1E1E1E;
-    --color-text: #F2F2F2;
-    --color-text-muted: #B5B5B5;
-    --color-border: #333333;
+    --color-primary: #5FA35A;        /* lighter green so it shows on a dark background */
+    --color-primary-hover: #74B86F;
+    --color-accent-text: #D4A63A;
+    --color-bg: #121A15;
+    --color-surface: #1A241D;
+    --color-text: #EEF2EE;
+    --color-text-muted: #A7B3AB;
+    --color-border: #2A362D;
     --color-error: #FF8A80;
     --color-success: #81C784;
+    --color-footer: #0B120D;
+
+    /* Dark mode: gold button with dark text */
+    --btn-bg: #D4A63A;
+    --btn-text: #1C2420;
+    --btn-hover: #E2B84A;
+
+    --focus-ring: 0 0 0 3px rgba(212, 166, 58, 0.35);
     color-scheme: dark;   /* makes scrollbars and date pickers dark too */
 }
 
@@ -43,7 +72,8 @@ html {
 }
 
 body {
-    font-family: var(--font);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
@@ -51,6 +81,15 @@ body {
     display: flex;
     flex-direction: column;
     transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
 }
 
 main {
@@ -61,7 +100,7 @@ main {
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 20px;
 }
 
 /* Hidden on screen but still read out by screen readers */
@@ -74,22 +113,44 @@ main {
     white-space: nowrap;
 }
 
+/* Visible outline for keyboard users */
+a:focus-visible,
+button:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* Lucide icons are SVGs - make them line up with text */
+svg.lucide {
+    flex-shrink: 0;
+}
+
 /* ===== Header ===== */
 .site-header {
     position: sticky;      /* header stays at the top when scrolling */
     top: 0;
     z-index: 100;
     background-color: var(--color-bg);
-    border-bottom: 3px solid var(--color-primary);
-    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+    padding: 12px 0;
 }
 
 .logo {
-    font-size: 1.4rem;
-    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
     color: var(--color-text);
     text-decoration: none;
     white-space: nowrap;   /* keep the name on one line */
+}
+
+.logo img {
+    width: 48px;
+    height: 48px;
+    display: block;
 }
 
 /* ===== Navigation ===== */
@@ -102,7 +163,7 @@ main {
 
 .main-nav ul {
     display: flex;
-    gap: 24px;
+    gap: 28px;
     list-style: none;
 }
 
@@ -110,14 +171,14 @@ main {
     color: var(--color-text);
     text-decoration: none;
     white-space: nowrap;   /* "Rent a Bike" never splits over two lines */
-    font-weight: 500;
+    font-weight: 600;
     padding: 4px 0;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
 }
 
 .main-nav a:hover,
 .main-nav a.active {
-    border-bottom-color: var(--color-primary);
+    border-bottom-color: var(--color-accent);
 }
 
 .header-actions {
@@ -126,14 +187,14 @@ main {
     gap: 8px;
 }
 
+/* Round icon buttons: search (mobile), light/dark, menu */
 .icon-btn {
     background: none;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    border-radius: 50%;
     color: var(--color-text);
-    font-size: 1.2rem;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     cursor: pointer;
     display: inline-flex;          /* centres the icon (also for <a> icons) */
     align-items: center;
@@ -141,26 +202,46 @@ main {
     text-decoration: none;
 }
 
-.icon-btn:hover {
-    border-color: var(--color-primary);
+.icon-btn svg {
+    width: 20px;
+    height: 20px;
 }
 
-/* Small search box in the header (desktop) */
+.icon-btn:hover {
+    border-color: var(--color-accent);
+}
+
+/* Search box in the header (desktop) with a search icon inside */
+.header-search {
+    position: relative;
+}
+
+.header-search svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    pointer-events: none;
+}
+
 .header-search input {
-    width: 160px;
-    height: 40px;
-    padding: 0 12px;
+    width: 180px;
+    height: 42px;
+    padding: 0 14px 0 38px;
     font: inherit;
     color: var(--color-text);
-    background-color: var(--color-bg);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    border-radius: 999px;
 }
 
 .header-search input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(245, 163, 0, 0.3);
+    box-shadow: var(--focus-ring);
 }
 
 /* Hidden on big screens */
@@ -188,7 +269,8 @@ main {
         left: 0;
         right: 0;
         background-color: var(--color-bg);
-        border-bottom: 3px solid var(--color-primary);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 12px 24px rgba(15, 36, 20, 0.08);
     }
 
     .main-nav.open {
@@ -198,12 +280,23 @@ main {
     .main-nav ul {
         flex-direction: column;
         gap: 0;
-        padding: 8px 16px 16px;
+        padding: 8px 20px 16px;
     }
 
     .main-nav a {
         display: block;
         padding: 12px 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .logo span {
+        font-size: 1.1rem;
+    }
+
+    .logo img {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -215,24 +308,24 @@ main {
 }
 
 .hero h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
     margin-bottom: 16px;
 }
 
 .hero p {
     color: var(--color-text-muted);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     margin-bottom: 24px;
 }
 
-/* Rounded "pill" that shows the price */
+/* Price label in the hero */
 .hero .hero-price {
     display: inline-block;
     background-color: var(--color-bg);
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--color-accent);
     border-radius: 999px;
-    padding: 4px 16px;
-    font-weight: 600;
+    padding: 4px 18px;
+    font-weight: 700;
     color: var(--color-text);
 }
 
@@ -245,25 +338,25 @@ main {
 
 /* ===== Sections (reused on every page) ===== */
 .section {
-    padding: 64px 0;
+    padding: 72px 0;
     scroll-margin-top: 80px;   /* stops the sticky header covering the heading */
 }
 
-/* Cream background to separate sections */
+/* Green-grey background to separate sections */
 .section-alt {
     background-color: var(--color-surface);
 }
 
 .section-title {
     text-align: center;
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    margin-bottom: 8px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 10px;
 }
 
 .section-subtitle {
     text-align: center;
     color: var(--color-text-muted);
-    margin-bottom: 40px;
+    margin-bottom: 44px;
 }
 
 /* ===== Cards ===== */
@@ -277,12 +370,12 @@ main {
 .card {
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-top: 4px solid var(--color-primary);
     border-radius: var(--radius);
-    padding: 24px;
+    padding: 28px;
 }
 
 .card h3 {
+    font-size: 1.35rem;
     margin-bottom: 8px;
 }
 
@@ -290,9 +383,24 @@ main {
     color: var(--color-text-muted);
 }
 
+/* Round icon at the top of a card (emoji now, Lucide icons in the next task) */
 .card-icon {
-    font-size: 2rem;
-    margin-bottom: 8px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.card-icon svg {
+    width: 24px;
+    height: 24px;
 }
 
 /* ===== Numbered steps ===== */
@@ -316,40 +424,45 @@ main {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background-color: var(--color-primary);
-    color: #1F1F1F;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    font-family: var(--font-heading);
     font-weight: 700;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .steps h3 {
+    font-size: 1.3rem;
     margin-bottom: 4px;
 }
 
 /* ===== Call-to-action band ===== */
 .cta-band {
-    background-color: var(--color-primary);
-    color: #1F1F1F;
+    background-color: var(--color-footer);
+    color: #FFFFFF;
     text-align: center;
-    padding: 48px 0;
+    padding: 56px 0;
 }
 
 .cta-band h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    margin-bottom: 16px;
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    margin-bottom: 20px;
 }
 
 /* ===== Page header (top banner on inner pages) ===== */
 .page-header {
     background-color: var(--color-surface);
-    padding: 48px 0;
+    border-bottom: 1px solid var(--color-border);
+    padding: 56px 0;
     text-align: center;
 }
 
 .page-header h1 {
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 8px;
 }
 
 .page-header p {
@@ -363,8 +476,8 @@ main {
 }
 
 .legal-page h2 {
-    font-size: 1.3rem;
-    margin: 32px 0 12px;
+    font-size: 1.4rem;
+    margin: 36px 0 12px;
 }
 
 .legal-page ul {
@@ -377,7 +490,7 @@ main {
 }
 
 .legal-page a {
-    color: var(--color-accent);
+    color: var(--color-primary);
 }
 
 .last-updated {
@@ -400,26 +513,26 @@ main {
 .search-form input {
     flex: 1;
     min-width: 0;
-    padding: 12px 16px;
+    padding: 12px 20px;
     font: inherit;
     font-size: 1.1rem;
     color: var(--color-text);
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    border-radius: 999px;
 }
 
 .search-form input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(245, 163, 0, 0.3);
+    box-shadow: var(--focus-ring);
 }
 
 .search-form button {
     border: none;
     cursor: pointer;
     font: inherit;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .search-summary {
@@ -433,19 +546,20 @@ main {
 
 /* One search result: title link, snippet, page name */
 .search-result {
-    padding: 16px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--color-border);
 }
 
 .search-result-title {
-    font-size: 1.2rem;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--color-text);
     text-decoration: none;
 }
 
 .search-result-title:hover {
-    color: var(--color-accent);
+    color: var(--color-primary);
     text-decoration: underline;
 }
 
@@ -456,18 +570,18 @@ main {
 
 .search-result-url {
     font-size: 0.85rem;
-    color: var(--color-accent);
+    color: var(--color-accent-text);
 }
 
 /* "No results found" box */
 .no-results {
     background-color: var(--color-surface);
     border-radius: var(--radius);
-    padding: 24px;
+    padding: 28px;
 }
 
 .no-results h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 8px;
 }
 
@@ -476,8 +590,8 @@ main {
 }
 
 .no-results a {
-    color: var(--color-accent);
-    font-weight: 600;
+    color: var(--color-primary);
+    font-weight: 700;
 }
 
 /* ===== About page ===== */
@@ -485,11 +599,12 @@ main {
 .two-col {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
+    gap: 40px;
 }
 
 .two-col h2 {
-    margin-bottom: 12px;
+    font-size: 1.8rem;
+    margin-bottom: 14px;
 }
 
 .prose p {
@@ -501,7 +616,7 @@ main {
 }
 
 .info-list li {
-    padding: 8px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -510,14 +625,14 @@ main {
     text-align: center;
 }
 
-/* Round placeholder - later replaced by a photo */
+/* Round photo (or placeholder) with a gold ring like the logo */
 .avatar {
-    width: 96px;
-    height: 96px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     margin: 0 auto 16px;
     background-color: var(--color-surface);
-    border: 3px solid var(--color-primary);
+    border: 3px solid var(--color-accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -563,12 +678,12 @@ main {
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    padding: 24px;
+    padding: 28px;
 }
 
 /* Heading inside a form card, e.g. "Send us a message" */
 .form-title {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-bottom: 8px;
 }
 
@@ -604,21 +719,21 @@ main {
 .form-group textarea,
 .form-group select {
     width: 100%;
-    padding: 10px 12px;
+    padding: 11px 14px;
     font: inherit;
     color: var(--color-text);
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    border-radius: 10px;
 }
 
-/* Yellow glow on the field you are typing in */
+/* Green glow on the field you are typing in */
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(245, 163, 0, 0.3);
+    box-shadow: var(--focus-ring);
 }
 
 /* Red border when a field has an error (added by JavaScript in Task 6.3) */
@@ -675,17 +790,18 @@ main {
 .checkbox-group input {
     width: auto;
     margin-top: 5px;
+    accent-color: var(--color-primary);
 }
 
 .checkbox-group a {
-    color: var(--color-accent);
+    color: var(--color-primary);
 }
 
 .form-card button {
     border: none;
     cursor: pointer;
     font: inherit;
-    font-weight: 600;
+    font-weight: 700;
     width: 100%;
 }
 
@@ -713,19 +829,20 @@ main {
 }
 
 .success-message h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 8px;
 }
 
-/* Cream box beside the form */
+/* Box beside the form */
 .info-box {
     background-color: var(--color-surface);
     border-radius: var(--radius);
-    padding: 24px;
+    border-top: 4px solid var(--color-accent);
+    padding: 28px;
 }
 
 .info-box h2 {
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     margin-bottom: 12px;
 }
 
@@ -740,7 +857,7 @@ main {
 /* ===== Contact page ===== */
 /* Right-hand column: details, social links, map */
 .contact-aside h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 12px;
 }
 
@@ -759,7 +876,7 @@ main {
 }
 
 .contact-details a:hover {
-    color: var(--color-accent);
+    color: var(--color-primary);
 }
 
 /* Social media buttons */
@@ -772,9 +889,11 @@ main {
 }
 
 .social-links a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 8px 18px;
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--color-border);
     border-radius: 999px;
     color: var(--color-text);
     text-decoration: none;
@@ -782,8 +901,8 @@ main {
 }
 
 .social-links a:hover {
-    background-color: var(--color-primary);
-    color: #1F1F1F;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 /* Google map */
@@ -796,68 +915,84 @@ main {
 
 /* ===== Buttons ===== */
 .btn {
-    display: inline-block;
-    padding: 12px 28px;
-    border-radius: var(--radius);
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border-radius: 999px;
+    font-weight: 700;
     text-decoration: none;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Dark text on yellow - white text on yellow is hard to read */
+.btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Main button: green with white text (gold with dark text in dark mode) */
 .btn-primary {
-    background-color: var(--color-primary);
-    color: #1F1F1F;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
 }
 
 .btn-primary:hover {
-    background-color: var(--color-accent);
+    background-color: var(--btn-hover);
 }
 
-/* Transparent button with a yellow border */
+/* Transparent button with a border */
 .btn-outline {
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--color-border);
     color: var(--color-text);
 }
 
 .btn-outline:hover {
-    background-color: var(--color-primary);
-    color: #1F1F1F;
+    border-color: var(--color-primary);
 }
 
-/* Dark button - used on yellow backgrounds */
+/* Gold button - used on the dark green call-to-action band */
 .btn-dark {
-    background-color: #1F1F1F;
-    color: #FFFFFF;
+    background-color: #D4A63A;
+    color: #1C2420;
 }
 
 .btn-dark:hover {
-    background-color: #000000;
+    background-color: #E2B84A;
 }
 
 /* ===== Footer ===== */
 .site-footer {
-    background-color: #1F1F1F;
-    color: #FFFFFF;
-    padding: 40px 0 24px;
-    font-size: 0.9rem;
+    background-color: var(--color-footer);
+    color: #DCE6DE;
+    padding: 48px 0 24px;
+    font-size: 0.95rem;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    margin-bottom: 24px;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.footer-logo {
+    display: block;
+    margin-bottom: 12px;
 }
 
 .site-footer h3 {
-    color: var(--color-primary);
-    font-size: 1rem;
-    margin-bottom: 8px;
+    color: #D4A63A;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
 }
 
 .site-footer ul {
     list-style: none;
+}
+
+.site-footer li {
+    margin-bottom: 4px;
 }
 
 .site-footer a {
@@ -865,12 +1000,27 @@ main {
 }
 
 .site-footer a:hover {
-    color: var(--color-primary);
+    color: #D4A63A;
+}
+
+/* Footer contact lines with an icon in front */
+.footer-line {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.footer-line svg {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    color: #D4A63A;
 }
 
 .footer-bottom {
-    border-top: 1px solid #3A3A3A;
-    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 18px;
     text-align: center;
-    color: #BDBDBD;
+    color: #A7B3AB;
 }

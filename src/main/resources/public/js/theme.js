@@ -37,8 +37,12 @@
 
         function updateButton() {
             const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-            button.textContent = isDark ? "☀" : "☾";
+            // Lucide icon names: "sun" in dark mode (switch to light), "moon" in light mode
+            button.innerHTML = `<i data-lucide="${isDark ? "sun" : "moon"}" aria-hidden="true"></i>`;
             button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+            if (typeof refreshIcons === "function") {
+                refreshIcons();   // defined in layout.js
+            }
         }
 
         button.addEventListener("click", () => {
@@ -50,6 +54,7 @@
         });
 
         updateButton();
-        actions.prepend(button);
+        // Before the menu button, so the order is: search, theme, menu
+        actions.querySelector(".menu-toggle").before(button);
     });
 })();
